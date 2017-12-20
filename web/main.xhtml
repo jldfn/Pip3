@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <script type="text/javascript" src="JavaScript/Plot.js"/>
+    </h:head>
+    <title>
+        Lab #3
+    </title>
+    <body>
+        <div id="form">
+            <h:form>
+                <h:outputText id="output" value="Set X to 0"/>
+                <h:inputHidden id="varX" value="#{backBean.x}"/>
+                <p:slider for="varX" step="0.5" maxValue="2" minValue="-2" display="output" style="width: 100px"
+                          displayTemplate="Set X to {value}"/>
+                <h:outputLabel for="varY" value="Set Y: "/>
+                <h:inputText id="varY" style="text-align: right" value="#{backBean.y}"
+                             validatorMessage="Wrong range: y should be between -5 and 5">
+                    <f:validateDoubleRange minimum="-5.0" maximum="5" for="varY"/>
+                </h:inputText>
+                <h:outputLabel for="varR" value="Set R: "/>
+                <h:inputText id="varR" style="text-align: right" value="#{backBean.r}"
+                             validatorMessage="Wrong range: R should be between 0 and 5">
+                    <f:validateDoubleRange minimum="0" maximum="5" for="varR"/>
+                    <f:ajax event="blur" execute="varR" render="resTable"/>
+                </h:inputText>
+                <p:commandButton value="Submit" id="ajax" update="resTable" actionListener="#{backBean.addPoint}"
+                                 styleClass="ui-priority-primary" ajax="true"/>
+            </h:form>
+            <div id="table">
+                <h:dataTable id="resTable" var="res" value="#{backBean.points}">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="X">
+                            </h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{res.x}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Y">
+                            </h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{res.y}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="In area">
+                            </h:outputText>
+                        </f:facet>
+                        <h:outputText value="#{res.result}"/>
+                    </h:column>
+                </h:dataTable>
+            </div>
+
+        </div>
+        <div id="image">
+            <h:outputText id="test" value="dasdasda"/>
+            <h:commandButton onclick="redraw(2)"/>
+            <canvas id="graph" width="500" height="500"></canvas>
+            <script type="text/javascript">
+                drawPoints();
+            </script>
+        </div>
+    </body>
+</html>
