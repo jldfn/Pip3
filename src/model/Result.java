@@ -1,16 +1,28 @@
 package model;
 
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Result")
 public class Result {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private double x;
     private double y;
-    private double r;
+    @Transient
     private boolean result;
 
-    public Result(double x, double y, double r){
+    public Result(double x, double y,double r){
         this.x=x;
         this.y=y;
-        this.r=r;
-        this.result=computeRes();
+        this.result=computeRes(r);
+    }
+
+    public Result(){
+        x=0;
+        y=0;
     }
 
     public double getX() {
@@ -29,14 +41,6 @@ public class Result {
         this.y = y;
     }
 
-    public double getR() {
-        return r;
-    }
-
-    public void setR(double r) {
-        this.r = r;
-    }
-
     public boolean isResult() {
         return result;
     }
@@ -45,7 +49,7 @@ public class Result {
         this.result = result;
     }
 
-    public boolean computeRes(){
+    public boolean computeRes(double r){
         return (y>=0&&x>=0&&y<=r&&x<=r)||(x<=0&&y<=0&&x>=-r&&y>=-(x+r))||(x>=0&&x<=r/2&&y<=0&&y>=-r/2&&(x*x+y*y)<r*r/4);
     }
 
