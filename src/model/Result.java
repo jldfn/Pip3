@@ -46,7 +46,7 @@ public class Result {
     }
 
     public boolean computeRes(){
-        return (y>=0&&x>=0&&y<=r&&x<=r)||(x<=0&&y<=0&&x>=-r&&y>=-(x+r))||(x>=0&&x<=r/2&&y<=0&&y>=-r/2&&(x*x+y*y)<r*r);
+        return (y>=0&&x>=0&&y<=r&&x<=r)||(x<=0&&y<=0&&x>=-r&&y>=-(x+r))||(x>=0&&x<=r/2&&y<=0&&y>=-r/2&&(x*x+y*y)<r*r/4);
     }
 
 }

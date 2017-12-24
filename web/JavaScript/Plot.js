@@ -1,6 +1,6 @@
 var Height=600;
 var Width=600;
-var oldR=2.0;
+var oldR=0;
 var rScale=50;
 
 function redraw(r){
@@ -91,7 +91,11 @@ function getPoint() {
 }
 
 function drawPoints() {
-    redraw(document.getElementById("j_idt5:varR").value);
+    var r=document.getElementById("j_idt5:varR").value;
+    if(r<=5&&r>=0) {
+        oldR=r;
+    }
+    redraw(oldR);
     var res_table = document.getElementById("resTable");
     for (var i = 1; i < res_table.rows.length; i++) {
         drawPoint(res_table.rows[i].cells[0].textContent, res_table.rows[i].cells[1].textContent, res_table.rows[i].cells[2].textContent);
@@ -100,9 +104,9 @@ function drawPoints() {
 }
 
 function sendPoint(x, y, r) {
-    var resX = Math.round((x - Width/2) / rScale);
+    var resX = ((x - Width/2) / rScale);
     var resY = (Height/2 - y) / rScale;
-    document.getElementById("j_idt5:varX").setAttribute("value","1");
+    document.getElementById("j_idt5:varX").value=resX;
     document.getElementById("j_idt5:varY").value = resY;
     document.getElementById("j_idt5:ajax").click();
 }

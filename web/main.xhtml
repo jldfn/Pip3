@@ -27,10 +27,10 @@
                 <h:inputText id="varR" style="text-align: right" value="#{backBean.r}"
                              validatorMessage="Wrong range: R should be between 0 and 5">
                     <f:validateDoubleRange minimum="0" maximum="5" for="varR"/>
-                    <f:ajax event="blur" execute="varR" render="resTable"/>
+                    <f:ajax event="blur" execute="varR" render="resTable" onevent="drawPoints"/>
                 </h:inputText>
                 <p:commandButton value="Submit" id="ajax" update="resTable" actionListener="#{backBean.addPoint}"
-                                 styleClass="ui-priority-primary" ajax="true"/>
+                                 styleClass="ui-priority-primary" ajax="true" oncomplete="drawPoints()"/>
             </h:form>
             <div id="table">
                 <h:dataTable id="resTable" var="res" value="#{backBean.points}">
