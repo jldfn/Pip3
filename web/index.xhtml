@@ -8,12 +8,14 @@
       xmlns:p="http://primefaces.org/ui">
 <f:view>
    <h:head>
+      <link type="text/css" rel="stylesheet"
+            href="Stylesheets/indexStyle.css" />
       <title>Lab 3</title>
    </h:head>
 
    <h:body>
 
-      <div>
+      <div id="index">
          <h1>
             Лабораторная работа №3
          </h1>
@@ -23,13 +25,33 @@
          <p>
             <b>Вариант 376</b>
          </p>
+         <div id="clock">
+            <div id="time">
+
+            </div>
+            <div id="date">
+
+            </div>
+            <script type="text/javascript">
+                //<![CDATA[
+                clock();
+                function clock() {
+                    var date = new Date();
+                    var hours = date.getHours();
+                    var minutes = date.getMinutes();
+                    var seconds= date.getSeconds();
+                    if (hours < 10) hours = "0" + hours;
+                    if (minutes < 10) minutes = "0" + minutes;
+                    if (seconds<10) seconds="0"+seconds;
+                    document.getElementById('time').innerHTML = hours + ":" + minutes+":"+seconds;
+                    document.getElementById('date').innerHTML = date.getUTCDate() + "." + (date.getUTCMonth()+1) + "." + date.getFullYear();
+                    setTimeout('clock()', 8000);
+                }
+                //]]>
+            </script>
+         </div>
          <h:form>
-            <p>
-               <p:clock pattern="dd MMMM yyyy HH:mm:ss" syncInterval="8000" mode="server"/>
-            </p>
-            <p>
-               <h:button outcome="main" value="К основной странице"/>
-            </p>
+               <h:button id="nextp" outcome="main" value="К основной странице"/>
          </h:form>
       </div>
    </h:body>

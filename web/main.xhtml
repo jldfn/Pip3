@@ -7,6 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <script type="text/javascript" src="JavaScript/Plot.js"/>
+        <link type="text/css" rel="stylesheet" href="Stylesheets/mainStyle.css" />
     </h:head>
     <title>
         Lab #3
@@ -18,20 +19,24 @@
                 <h:inputHidden id="varX" value="#{backBean.x}"/>
                 <p:slider for="varX" step="0.5" maxValue="2" minValue="-2" display="output" style="width: 100px"
                           displayTemplate="Set X to {value}"/>
+
                 <h:outputLabel for="varY" value="Set Y: "/>
                 <h:inputText id="varY" style="text-align: right" value="#{backBean.y}"
                              validatorMessage="Wrong range: y should be between -5 and 5">
                     <f:validateDoubleRange minimum="-5.0" maximum="5" for="varY"/>
                 </h:inputText>
+
                 <h:outputLabel for="varR" value="Set R: "/>
                 <h:inputText id="varR" style="text-align: right" value="#{backBean.r}"
                              validatorMessage="Wrong range: R should be between 0 and 5">
                     <f:validateDoubleRange minimum="0" maximum="5" for="varR"/>
                     <f:ajax event="blur" execute="varR" render="resTable" onevent="drawPoints"/>
                 </h:inputText>
+
                 <p:commandButton value="Submit" id="ajax" update="resTable" actionListener="#{backBean.addPoint}"
                                  styleClass="ui-priority-primary" ajax="true" oncomplete="drawPoints()"/>
             </h:form>
+
             <div id="table">
                 <h:dataTable id="resTable" var="res" value="#{backBean.points}">
                     <h:column>
@@ -59,13 +64,19 @@
             </div>
 
         </div>
+
         <div id="image">
-            <h:outputText id="test" value="dasdasda"/>
-            <h:commandButton onclick="redraw(2)"/>
             <canvas id="graph" width="500" height="500"></canvas>
             <script type="text/javascript">
                 drawPoints();
             </script>
         </div>
+
+        <div id="toIndex">
+            <h:form>
+                <h:button id="indexp" outcome="index" value="К начальной странице"/>
+            </h:form>
+        </div>
+
     </body>
 </html>

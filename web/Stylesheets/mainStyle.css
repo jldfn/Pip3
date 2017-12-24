@@ -1,0 +1,37 @@
+body{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    grid-auto-rows: minmax(600px,auto);
+    background-image: url("/LABA_PO_PIPU_NOMER_TRI_war_exploded/Resources/main_bg.jpg");
+    background-size:100%;
+    background-repeat: repeat-y;
+    background-attachment: fixed;
+    height:100%;
+    width:100%
+}
+
+#form{
+    grid-column: 1;
+    grid-row: 1;
+    font-family: "Century Gothic";
+}
+
+#graph{
+    grid-column: 2/4;
+    grid-row: 1;
+    font-family: "Century Gothic";
+}
+
+#resTable{
+    grid-column: 2;
+    grid-row: 2;
+    font-family: "Century Gothic";
+}
+
+#toIndex{
+    grid-column: 1;
+    grid-row: 2;
+    font-family: "Century Gothic";
+}

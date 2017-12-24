@@ -56,6 +56,7 @@ public class BackBean {
         manager.getTransaction().begin();
         manager.persist(res);
         manager.getTransaction().commit();
+        manager.close();
     }
 
     public void recompute(){
